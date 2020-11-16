@@ -1,5 +1,5 @@
 {
-    "name": "@flight-dashboard/server",
+    "name": "@bookmanager/server",
     "version": "0.1.0",
     "scripts": {
         "start": "set DEBUG=express:* & nodemon ./app.js"

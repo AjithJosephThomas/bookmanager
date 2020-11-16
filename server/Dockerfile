@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:13.6.0
 COPY . /var/lib/server/
 WORKDIR /var/lib/server
 RUN npm install
