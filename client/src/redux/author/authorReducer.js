@@ -1,61 +1,62 @@
 import {
-  FETCH_ALL_CAPSULES_SUCCESS,
-  FETCH_ALL_CAPSULES_FAILURE,
-  SHOW_INPROGRESS,
-  FETCH_LANDING_PAD_FAILURE,
-  FETCH_LANDING_PAD_SUCCESS,
-} from "./bookActionTypes";
+  SHOW_AUTHOR_INPROGRESS,
+  FETCH_AUTHOR_SUCCESS,
+  CREATE_AUTHOR_SUCCESS,
+  DELETE_AUTHOR_SUCCESS,
+  UPDATE_AUTHOR_SUCCESS,
+  FETCH_ALL_AUTHORS_SUCCESS,
+} from "./authorActionTypes";
 const initialState = {
-  allCapsules: [],
-  isFetchingInProgress: false,
-  isAllCapsulesFetchSuccess: false,
-  isLandingPadFetchSuccess: true,
-  isShowAllCapsulesMode: true,
+  allAuthors: [],
+  author: null,
+  isServiceCallInProgress: false,
   errorMessage: null,
-  landingPad: null,
 };
 
 const reducer = (state = initialState, action) => {
   const { payload } = action;
   switch (action.type) {
-    case SHOW_INPROGRESS:
-      return { ...state, isFetchingInProgress: true, errorMessage: null };
-    case FETCH_ALL_CAPSULES_SUCCESS:
-      const  allCapsules = payload
+    case SHOW_AUTHOR_INPROGRESS:
+      return { ...state, isServiceCallInProgress: true, errorMessage: null };
+    case FETCH_ALL_AUTHORS_SUCCESS:
+      const allAuthors = payload;
       return {
         ...state,
-        allCapsules,
-        isShowAllCapsulesMode: true,
-        isAllCapsulesFetchSuccess: true,
-        isFetchingInProgress: false,
+        allAuthors,
+        isServiceCallInProgress: false,
         errorMessage: null,
       };
-    case FETCH_ALL_CAPSULES_FAILURE:
+    case FETCH_AUTHOR_SUCCESS:
+      const { author } = payload;
       return {
         ...state,
-        allCapsules: [],
-        isShowAllCapsulesMode: true,
-        isAllCapsulesFetchSuccess: false,
-        isFetchingInProgress: false,
-        errorMessage: payload.errorMessage,
+        author,
+        isServiceCallInProgress: false,        
+        errorMessage: null,
       };
-    case FETCH_LANDING_PAD_SUCCESS:
-      const { landingPad } = payload;
+    case CREATE_AUTHOR_SUCCESS:
+      const { author } = payload;
       return {
         ...state,
-        isCurrCapsuleFetchSuccess: true,
-        isShowAllCapsulesMode: false,
-        landingPad,
-        isFetchingInProgress: false,
+        allAuthors,
+        isServiceCallInProgress: false,        
+        errorMessage: null
       };
-    case FETCH_LANDING_PAD_FAILURE:
+    case UPDATE_AUTHOR_SUCCESS:
+      const { author } = payload;
       return {
         ...state,
-        isCurrCapsuleFetchSuccess: false,
-        isShowAllCapsulesMode: false,
-        landingPad: null,
-        isFetchingInProgress: false,
-        errorMessage: payload.errorMessage,
+        allAuthors,
+        isServiceCallInProgress: false,        
+        errorMessage: null
+      };
+    case DELETE_AUTHOR_SUCCESS:
+      const { author } = payload;
+      return {
+        ...state,
+        allAuthors,
+        isServiceCallInProgress: false,        
+        errorMessage: null
       };
     default:
       return state;

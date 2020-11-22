@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
-
 app.use(cors());
 
 app.use(bodyParser.json());
@@ -80,7 +79,6 @@ app.put("/author/:id", async (req, res) => {
       query += `last_name ='${last_name}'`;
     }
     query += `FROM author where id =${id}`;
-
     const response = await dbPool.query(query);
     const author = { first_name, last_name, id };
     res.status(200);
@@ -92,7 +90,6 @@ app.put("/author/:id", async (req, res) => {
 });
 app.delete("/author/:id", async (req, res) => {
   const { id } = req.params;
-
   try {
     selectRows = await dbPool.query(`DELETE FROM author where id = ${id}`);
 
@@ -185,14 +182,8 @@ app.put("/book/:id", async (req, res) => {
 });
 app.delete("/book/:id", async (req, res) => {
   const { id } = req.params;
-  let book = [];
-
   try {
     selectRows = await dbPool.query(`DELETE FROM book where id = ${id}`);
-    console.log(selectRows);
-    if (selectRows.length) {
-      authors = JSON.parse(selectRows);
-    }
     res.status(200);
     res.send(id);
   } catch (error) {
