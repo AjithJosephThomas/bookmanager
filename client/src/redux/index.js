@@ -1,11 +1,11 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
-import spaceData from './spaceData/spaceDataReducer';
-
+import bookData from './book/bookReducer';
+import authorData from './author/authorReducer';
 const { NODE_ENV } = process.env;
 const isDevelopment = NODE_ENV === 'development';
 
-const slices = combineReducers({ spaceData});
+const slices = combineReducers({ bookData,authorData});
 
 const  composeEnhancers = isDevelopment && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 })

@@ -1,83 +1,64 @@
 import axios from "axios";
-import { ServiceEnpoint } from "../../apiConstant";
+import { ServiceEndpoint } from "../../apiConstant";
 import {
   FETCH_ALL_BOOKS_SUCCESS,
-  FETCH_BOOK_SUCCESS,  
-  CREATE_BOOK_SUCCESS,  
+  FETCH_BOOK_SUCCESS,
+  CREATE_BOOK_SUCCESS,
   UPDATE_BOOK_SUCCESS,
-  DELETE_BOOK_SUCCESS,
-  SHOW_INPROGRESS,
 } from "./bookActionTypes";
-const showInProgress = () => ({
-  type: SHOW_INPROGRESS,
+
+const fetchAllBooksSuccess = (allBooks) => ({
+  type: FETCH_ALL_BOOKS_SUCCESS,
+  payload: allBooks,
+});
+const fetchBookDetailsSuccess = (currBook) => ({
+  type: FETCH_BOOK_SUCCESS,
+  payload: currBook,
 });
 
-const createBookSuccess = (book) => ({
+const createBookSuccess = (message) => ({
   type: CREATE_BOOK_SUCCESS,
-  payload: book,
+  payload: message,
+});
+const updateBookSuccess = (message) => ({
+  type: UPDATE_BOOK_SUCCESS,
+  payload: message,
 });
 
 export const createBook = (book) => async (dispatch) => {
   try {
-    dispatch(showInProgress());
-    const book = await axios.post(`${ServiceEnpoint.BOOK}`);
-    dispatch(createBookSuccess(book));
-  } catch (error) {
-
-  }
+    //dispatch(showInProgress());
+    const { data } = await axios.post(`${ServiceEndpoint.BOOK}`, book);
+    dispatch(createBookSuccess(data));
+  } catch (error) {}
 };
-const updateBookSuccess = (book) => ({
-  type: UPDATE_BOOK_SUCCESS,
-  payload: book,
-});
-
 export const updateBook = (book) => async (dispatch) => {
   try {
-    dispatch(showInProgress());
-    const book = await axios.post(`${ServiceEnpoint.BOOK}`);
-    dispatch(updateBookSuccess(book));
-  } catch (error) {
+    //dispatch(showInProgress());
+    const { data } = await axios.put(
+      `${ServiceEndpoint.BOOK}/${book.id}`,
+      book
+    );
 
-  }
+    dispatch(updateBookSuccess(data));
+  } catch (error) {}
 };
-const deleteBookSuccess = (book) => ({
-  type: DELETE_BOOK_SUCCESS,
-  payload: book,
-});
 
-export const deleteBook = (book) => async (dispatch) => {
-  try {
-    dispatch(showInProgress());
-    const book = await axios.post(`${ServiceEnpoint.BOOK}`);
-    dispatch(deleteBookSuccess(book));
-  } catch (error) {
-
-  }
-};
-const fetchBookSuccess = (book) => ({
-  type: FETCH_BOOK_SUCCESS,
-  payload: book,
-});
-
-export const fetchBook = (book) => async (dispatch) => {
-  try {
-    dispatch(showInProgress());
-    const book = await axios.post(`${ServiceEnpoint.BOOK}`);
-    dispatch(fetchBookSuccess(book));
-  } catch (error) {
-
-  }
-};
-const fetchAllBooksSuccess = (books) => ({
-  type: FETCH_ALL_BOOKS_SUCCESS,
-  payload: books,
-});
 export const fetchAllBooks = () => async (dispatch) => {
   try {
-    dispatch(showInProgress());
-    const response = await axios.get(ServiceEnpoint.BOOK);
-    const books = response.data;
-    dispatch(fetchAllBooksSuccess(books));
+    //  dispatch(showInProgress());
+    const response = await axios.get(ServiceEndpoint.BOOK);
+    const { data } = response;
+    dispatch(fetchAllBooksSuccess(data));
+  } catch (error) {}
+};
+export const fetchBookDetails = (bookId) => async (dispatch) => {
+  try {
+    const url = `${ServiceEndpoint.BOOK}/${bookId}`;
+    const response = await axios.get(url);
+    const { data } = response;
+    dispatch(fetchBookDetailsSuccess(data));
   } catch (error) {
+    console.log(error);
   }
 };

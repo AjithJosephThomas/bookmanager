@@ -103,9 +103,7 @@ app.delete("/author/:id", async (req, res) => {
 
 app.get("/book", async (req, res) => {
   try {
-    const books = await dbPool.query(
-      `SELECT id, name,isbn,author_id FROM book`
-    );
+    const books = await dbPool.query(`SELECT id, name FROM book`);
     res.status(200);
     res.send(books);
   } catch (error) {
@@ -116,15 +114,14 @@ app.get("/book", async (req, res) => {
 app.get("/book/:id", async (req, res) => {
   const { id } = req.params;
   let book = null;
-
   try {
     selectRows = await dbPool.query(
-      `SELECT id, name,isbn,author FROM book where id='${id}'`
+      `select book.name,book.id,book.isbn, book.author_id, author.first_name, author.last_name from book left join author on book.author_id =author.id where book.id='${id}'`
     );
-
     if (selectRows.length) {
-      book = JSON.parse(selectRows[0]);
+      book = selectRows[0];
     }
+
     res.status(200);
     res.send(book);
   } catch (error) {
@@ -133,18 +130,20 @@ app.get("/book/:id", async (req, res) => {
   }
 });
 app.post("/book", async (req, res) => {
-  const { book } = req.body;
+  res.status(200);
+  const book = req.body;
+
   const { name, isbn, author_id } = book;
 
   try {
     const response = await dbPool.query(
-      `insert into book (name,isbn, author) values (${name},${isbn},${author_id})`
+      `insert into book (name,isbn, author_id) values ('${name}','${isbn}',${author_id})`
     );
-
-    const id = response.insertId;
-    book = { ...book, id };
     res.status(200);
-    res.send(book);
+
+    book.id = response.insertId;
+    res.status(200);
+    res.send(`${name} has been created successfully.`);
   } catch (error) {
     res.status(500);
     res.send(error);
@@ -153,28 +152,31 @@ app.post("/book", async (req, res) => {
 
 app.put("/book/:id", async (req, res) => {
   const { id } = req.params;
-  let book = null;
 
+  let book = null;
+  const { name, isbn, author_id } = req.body;
   try {
-    let query = `UPDATE book set `;
+    let query = `UPDATE book set`;
+
     if (name) {
-      query += `name ='${name}'`;
+      query += ` name ='${name}',`;
     }
+
     if (isbn) {
-      query += `author_id ='${isbn}'`;
+      query += ` isbn ='${isbn}',`;
     }
     if (author_id) {
-      query += `author_id ='${author_id}'`;
+      query += ` author_id =${author_id}`;
     }
-    query += `FROM book where id =${id}`;
+    query += ` where id =${id}`;
 
     selectRows = await dbPool.query(query);
 
     if (selectRows.length) {
-      book = JSON.parse(selectRows);
+      book = selectRows;
     }
     res.status(200);
-    res.send(book);
+    res.send(`${name} has been updated successfully.`);
   } catch (error) {
     res.status(500);
     res.send(error);

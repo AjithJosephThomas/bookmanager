@@ -1,54 +1,67 @@
 import axios from "axios";
-import { ServiceEnpoint } from "../../apiConstant";
+import { ServiceEndpoint } from "../../apiConstant";
 import {
   FETCH_ALL_AUTHORS_SUCCESS,
-  FETCH_ALL_AUTHORS_FAILURE,
   FETCH_AUTHOR_SUCCESS,
-  FETCH_AUTHOR_FAILURE,
-  SHOW_INPROGRESS,
-  CREATE_BOOK_SUCCESS,
-  CREATE_BOOK_FAILURE,
-  UPDATE_BOOK_SUCCESS,
-  UPDATE_BOOK_FAILURE,
+  CREATE_AUTHOR_SUCCESS,
+  UPDATE_AUTHOR_SUCCESS,
 } from "./authorActionTypes";
-const showInProgress = () => ({
-  type: SHOW_INPROGRESS,
-});
-const fetchAuthorSuccess = (books) => ({
-  type: FETCH_AUTHOR_SUCCESS,
-  payload: authors,
-});
-const fetchAuthorsFailure = (errorMessage) => ({
-  type: FETCH_AUTHOR_FAILURE,
-  payload: { errorMessage },
-});
 
-const createBookSuccess = (book) => ({
-  type: CREATE_BOOK_SUCCESS,
-  payload: book,
-});
+const fetchAllAuthorsSuccess = (allAuthors) => {
+  const allAuthorsNameVals = allAuthors.map(
+    ({ first_name, last_name, id }) => ({
+      label: `${first_name} ${last_name}`,
+      value: id,
+    })
+  );
 
-const createBookFailure = (errorMessage) => ({
-  type: CREATE_BOOK_FAILURE,
-  payload: { errorMessage },
-});
-export const createBook = (book) => async (dispatch) => {
-  try {
-    dispatch(showInProgress());
-    const book = await axios.post(`${ServiceEnpoint.BOOK}`);
-    dispatch(createBookSuccess(book));
-  } catch (error) {
-    dispatch(createBookFailure(error.message));
-  }
+  return {
+    type: FETCH_ALL_AUTHORS_SUCCESS,
+    payload: { allAuthors, allAuthorsNameVals },
+  };
 };
+const fetchAuthorDetailsSuccess = (currAuthor) => ({
+  type: FETCH_AUTHOR_SUCCESS,
+  payload: currAuthor,
+});
 
-export const fetchAllBooks = () => async (dispatch) => {
+const createAuthorSuccess = (author) => ({
+  type: CREATE_AUTHOR_SUCCESS,
+  payload: author,
+});
+const updateAuthorSuccess = (author) => ({
+  type: UPDATE_AUTHOR_SUCCESS,
+  payload: author,
+});
+export const createAuthor = (author) => async (dispatch) => {
   try {
-    dispatch(showInProgress());
-    const response = await axios.get(ServiceEnpoint.BOOK);
-    const books = response.data;
-    dispatch(fetchAllBooksSuccess(books));
+    //dispatch(showInProgress());
+    const author = await axios.post(`${ServiceEndpoint.AUTHOR}`);
+    dispatch(createAuthorSuccess(author));
+  } catch (error) {}
+};
+export const updateAuthor = (author) => async (dispatch) => {
+  try {
+    //dispatch(showInProgress());
+    const author = await axios.put(`${ServiceEndpoint.AUTHOR}`);
+    dispatch(updateAuthorSuccess(author));
+  } catch (error) {}
+};
+export const fetchAllAuthors = () => async (dispatch) => {
+  try {
+    //  dispatch(showInProgress());
+    const response = await axios.get(ServiceEndpoint.AUTHOR);
+    const { data } = response;
+    dispatch(fetchAllAuthorsSuccess(data));
+  } catch (error) {}
+};
+export const fetchAuthorDetails = (authorId) => async (dispatch) => {
+  try {
+    const url = `${ServiceEndpoint.AUTHOR}/${authorId}`;
+    const response = await axios.get(url);
+    const { data } = response;
+    dispatch(fetchAuthorDetailsSuccess(data));
   } catch (error) {
-    dispatch(fetchAllBookFailure(error.message));
+    console.log(error);
   }
 };
