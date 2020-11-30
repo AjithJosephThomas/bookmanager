@@ -1,15 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import {ResultList} from '../../style';
 const LinkList = ({linkCollection,linkPrefix}) => (
-  <div className="link-list">
-    <ul>
+
+    <ResultList>
       {linkCollection.map(({ id, name }) => (
         <li key={id}>
           <Link to={`${linkPrefix}${id}`}>{name}</Link>
         </li>
       ))}
-    </ul>
-  </div>
+    </ResultList>
 );
 export default LinkList;

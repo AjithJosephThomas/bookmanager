@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
     case CREATE_BOOK_SUCCESS:
       return {
         ...state,
-        messuccessMessageage: payload,
+        successMessage: payload,
       };
     case UPDATE_BOOK_SUCCESS:
       console.log(payload);

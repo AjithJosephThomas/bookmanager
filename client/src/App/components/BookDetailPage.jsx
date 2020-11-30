@@ -1,7 +1,8 @@
 import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchBookDetails } from "../../redux/book/bookActions";
+import {StyledLink} from '../../style';
 const BOOK_DETAIL_LINK_PREFIX = "/book/";
 const BookDetailPage = () => {
   const { currBook } = useSelector((state) => state.bookData);
@@ -28,7 +29,7 @@ const BookDetailPage = () => {
             </dd>
           </dl>
           <div>
-            <Link to={`${BOOK_DETAIL_LINK_PREFIX}${currBook.id}/update`}>Update</Link>
+            <StyledLink to={`${BOOK_DETAIL_LINK_PREFIX}${currBook.id}/update`}>Update</StyledLink>
           </div>
         </>
       ) : (

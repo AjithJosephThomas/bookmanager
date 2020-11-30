@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 
-import Select from "react-select";
+import { StyledSelect } from "../../style";
 import { useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-
-import {createBook,updateBook} from '../../redux/book/bookActions';
+import { createBook, updateBook } from '../../redux/book/bookActions';
 import { fetchAllAuthors } from "../../redux/author/authorActions";
-
+import { Form } from '../../style';
 const SaveBookForm = () => {
   console.log(useParams());
   const { bookId } = useParams();
@@ -21,7 +20,7 @@ const SaveBookForm = () => {
   }, []);
 
   const onSubmit = ({ author, name, isbn }) => {
-    
+
     const author_id = author.value;
     if (bookId) {
       const id = bookId;
@@ -32,31 +31,37 @@ const SaveBookForm = () => {
   };
 
   return (
-   <> <form onSubmit={handleSubmit(onSubmit)}>
-      <label>Name</label>
-      <input
-        name="name"
-        defaultValue={currBook?currBook.name:""}
-        ref={register({ required: true, maxLength: 20 })}
-      />
-      <label>isbn</label>
-      <input
-        name="isbn"
-        defaultValue={currBook?currBook.isbn:""}
-        ref={register({ required: true, maxLength: 20 })}
-      />
-      <label>Author</label>
-      <Controller
-        name="author"
-        as={Select}
-        options={allAuthorsNameVals}
-        control={control}
-        rules={{ required: true }}
-        defaultValue={currBook?allAuthorsNameVals.find(item=>item.value===currBook.author_id):null}
-      />
-      <input type="submit" />
-    </form>
-  {successMessage?<span>{successMessage}</span>:null}
+    <>
+      {bookId ? <h2>Update Book</h2> : <h2>Create Book</h2>}
+      <Form onSubmit={handleSubmit(onSubmit)} autoComplete={"off"}>
+
+        <label>Name</label>
+        <input
+          name="name"
+          type="text"
+          defaultValue={currBook ? currBook.name : ""}
+          ref={register({ required: true, maxLength: 20 })}
+        />
+
+        <label>isbn</label>
+        <input
+          name="isbn"
+          type="text"
+          defaultValue={currBook ? currBook.isbn : ""}
+          ref={register({ required: true, maxLength: 20 })}
+        />
+        <label>Author</label>
+        <Controller
+          name="author"
+          as={StyledSelect}
+          options={allAuthorsNameVals}
+          control={control}
+          rules={{ required: true }}
+          defaultValue={currBook ? allAuthorsNameVals.find(item => item.value === currBook.author_id) : null}
+        />
+        <input type="submit" />
+      </Form>
+      {successMessage ? <span>{successMessage}</span> : null}
     </>
   );
 };

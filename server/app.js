@@ -48,7 +48,8 @@ app.get("/author/:id", async (req, res) => {
   }
 });
 app.post("/author", async (req, res) => {
-  const { first_name, last_name } = req.body;
+  const author = req.body;
+  const {first_name,last_name} = author;
   if (!(req.body || req.body.length)) {
     res.status(500);
     res.send("Invalid body");
@@ -60,7 +61,7 @@ app.post("/author", async (req, res) => {
     const id = selectRow.insertId;
     const author = { first_name, last_name, id };
     res.status(200);
-    res.send(author);
+    res.send(`${first_name} ${last_name} has been created successfully.`);
   } catch (error) {
     res.status(500);
     res.send(error);
@@ -82,7 +83,7 @@ app.put("/author/:id", async (req, res) => {
     const response = await dbPool.query(query);
     const author = { first_name, last_name, id };
     res.status(200);
-    res.send(author);
+    res.send(`${first_name} ${last_name} has been updated successfully.`);
   } catch (error) {
     res.status(500);
     res.send(error);

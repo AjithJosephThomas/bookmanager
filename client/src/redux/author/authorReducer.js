@@ -11,12 +11,13 @@ const initialState = {
   allAuthors: [],
   allAuthorsNameVals:[],
   currAuthor: null,
+  successMessage: null,
 };
 
 const reducer = (state = initialState, action) => {
   const { payload } = action;
+
   switch (action.type) {
-  
     case FETCH_ALL_AUTHORS_SUCCESS:
       const {allAuthors,allAuthorsNameVals} = payload;      
       return {
@@ -34,16 +35,19 @@ const reducer = (state = initialState, action) => {
       
       return {
         ...state,
+        successMessage: payload,
       };
     case UPDATE_AUTHOR_SUCCESS:
       
       return {
         ...state,
+        successMessage: payload,
       };
     case DELETE_AUTHOR_SUCCESS:
       
       return {
-        ...state
+        ...state,
+        successMessage: payload,
       };
     default:
       return state;

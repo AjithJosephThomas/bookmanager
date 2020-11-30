@@ -36,15 +36,15 @@ const updateAuthorSuccess = (author) => ({
 export const createAuthor = (author) => async (dispatch) => {
   try {
     //dispatch(showInProgress());
-    const author = await axios.post(`${ServiceEndpoint.AUTHOR}`);
-    dispatch(createAuthorSuccess(author));
+    const {data} = await axios.post(`${ServiceEndpoint.AUTHOR}`,author);
+    dispatch(createAuthorSuccess(data));
   } catch (error) {}
 };
 export const updateAuthor = (author) => async (dispatch) => {
   try {
     //dispatch(showInProgress());
-    const author = await axios.put(`${ServiceEndpoint.AUTHOR}`);
-    dispatch(updateAuthorSuccess(author));
+    const {data}  = await axios.put(`${ServiceEndpoint.AUTHOR}`,author);
+    dispatch(updateAuthorSuccess(data));
   } catch (error) {}
 };
 export const fetchAllAuthors = () => async (dispatch) => {
