@@ -15,9 +15,9 @@ To run the application:
  
 # Serverside
 The (node) services will be available at 
-    http://localhost:4000/book
-    http://localhost:4000/author
-    To check the status of the service http://localhost:4000/status
+    - Book: http://localhost:4000/book
+    -  Author: http://localhost:4000/author
+    - To check the status of the service http://localhost:4000/status
     
 # Database
 MySQL database bookmanager available at localhost:3306. The application will be initially loaded with three books and three authors.
