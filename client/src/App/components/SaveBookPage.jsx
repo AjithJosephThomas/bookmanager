@@ -8,7 +8,7 @@ import { createBook, updateBook } from '../../redux/book/bookActions';
 import { fetchAllAuthors } from "../../redux/author/authorActions";
 import { Form } from '../../style';
 const SaveBookForm = () => {
-  console.log(useParams());
+  
   const { bookId } = useParams();
 
   const { control, register, handleSubmit } = useForm();
@@ -17,7 +17,7 @@ const SaveBookForm = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAllAuthors());
-  }, []);
+  }, [dispatch]);
 
   const onSubmit = ({ author, name, isbn }) => {
 

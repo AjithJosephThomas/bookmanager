@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import {Navbar as StyledComponent } from "../../style";
 const Navbar = () => (
   <StyledComponent>

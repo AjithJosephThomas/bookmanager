@@ -124,6 +124,9 @@ label{
  input[type="submit"]{
      margin-top:10px;
      padding:10px;
+     display:block;
+     margin-left:auto;
+     margin-right:auto;
      background:transparent;
      border:1px solid #fff;
      border-radius:5px;

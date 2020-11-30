@@ -17,22 +17,24 @@ const GlobalStyle = createGlobalStyle`
       align-items:center;
   }
   dl {
+    text-align: left;
     display: flex;
     flex-flow: row wrap;
+    border: 1px dashed #fff;
+    padding:10px;
   }
   dt {
     flex-basis: 20%;
     padding: 2px 4px;
-    text-align: right;
+   
     color: #fff;
-    border-bottom:1px dashed #fff;
     font-weight:bold;
   }
   dd {
     flex-basis: 70%;
     flex-grow: 1;
     margin: 0;
-    border-bottom:1px dashed #fff;
+    
     padding: 2px 4px;
   }
 `;

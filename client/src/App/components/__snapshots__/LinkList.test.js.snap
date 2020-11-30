@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinkList component renders LinkList component to render with empty list 1`] = `
+<ul
+  className="sc-AxirZ cjNxnn"
+/>
+`;
+
+exports[`LinkList component renders LinkList component to render with list 1`] = `
+<ul
+  className="sc-AxirZ cjNxnn"
+>
+  <li>
+    <a
+      href="/1"
+      onClick={[Function]}
+    >
+      test
+    </a>
+  </li>
+</ul>
+`;

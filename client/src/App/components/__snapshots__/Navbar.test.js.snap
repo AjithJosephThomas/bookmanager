@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar component renders header navbar 1`] = `
+<div
+  className="sc-AxjAm euKJqs"
+>
+  <div>
+    <h1>
+      Book Manager
+    </h1>
+  </div>
+  <div>
+    <ul
+      className="nav-menu"
+    >
+      <li>
+        <a
+          href="/allbooks"
+        >
+          Main
+        </a>
+      </li>
+      <li>
+        <a
+          href="/create-book"
+        >
+          Create Book
+        </a>
+      </li>
+      <li>
+        <a
+          href="/create-author"
+        >
+          Create Author
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`renders header navbar 1`] = `
+<div
+  className="sc-AxjAm euKJqs"
+>
+  <div>
+    <h1>
+      Book Manager
+    </h1>
+  </div>
+  <div>
+    <ul
+      className="nav-menu"
+    >
+      <li>
+        <a
+          href="/allbooks"
+        >
+          Main
+        </a>
+      </li>
+      <li>
+        <a
+          href="/create-book"
+        >
+          Create Book
+        </a>
+      </li>
+      <li>
+        <a
+          href="/create-author"
+        >
+          Create Author
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

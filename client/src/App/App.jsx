@@ -39,7 +39,7 @@ const App = () => (
           <SaveBookPage />
         </Route>
         
-        <Route path="/allbooks">
+        <Route path={["/allbooks","/"]}>
           <AllBooksPage />
         </Route>
       </Switch>

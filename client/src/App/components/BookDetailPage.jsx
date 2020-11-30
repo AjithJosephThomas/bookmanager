@@ -11,7 +11,7 @@ const BookDetailPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchBookDetails(bookId));
-  }, []);
+  }, [bookId,dispatch]);
 
   return (
     <>

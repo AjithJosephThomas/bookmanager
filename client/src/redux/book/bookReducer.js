@@ -3,8 +3,7 @@ import {
   DELETE_BOOK_SUCCESS,
   UPDATE_BOOK_SUCCESS,
   FETCH_BOOK_SUCCESS,
-  FETCH_ALL_BOOKS_SUCCESS,
-  SHOW_BOOK_INPROGRESS,
+  FETCH_ALL_BOOKS_SUCCESS
 } from "./bookActionTypes";
 
 const initialState = {

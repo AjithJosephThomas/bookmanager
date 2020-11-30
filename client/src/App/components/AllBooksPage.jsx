@@ -9,7 +9,7 @@ const AllBooksPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAllBooks());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <h2>Available Books</h2>

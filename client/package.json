@@ -15,7 +15,8 @@
     },
     "scripts": {
         "start": "react-app-rewired start",
-        "build": "react-app-rewired build"
+        "build": "react-app-rewired build",
+        "test": "react-app-rewired test --env=jsdom"
     },
     "dependencies": {
         "@hot-loader/react-dom": "16.13.0",
@@ -33,9 +34,17 @@
         "styled-components": "5.0.1"
     },
     "devDependencies": {
-        "jest": "^26.6.3",
+        "enzyme": "^3.11.0",
+        "enzyme-adapter-react-16": "^1.15.5",
+        "enzyme-to-json": "^3.6.1",
         "react-app-rewire-hot-loader": "2.0.1",
         "react-app-rewired": "2.1.5",
-        "react-hot-loader": "4.12.19"
+        "react-hot-loader": "4.12.19",
+        "react-test-renderer": "^16.0.0"
+    },
+    "jest": {
+        "snapshotSerializers": [
+            "<rootDir>/node_modules/enzyme-to-json/serializer"
+        ]
     }
 }
