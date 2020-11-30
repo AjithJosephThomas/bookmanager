@@ -3,7 +3,7 @@ To run the application, ensure you have docker installed.
 ```sh
  cd docker
  docker-compose build
- docker-compse up -d
+ docker-compose up -d
  ```
  # Clientside
   - The applicaiton will be available at http://localhost:3000
@@ -12,6 +12,9 @@ To run the application, ensure you have docker installed.
   
   # Testing
    - Snapshot testing implemented for two components. 
+   ```sh
+   docker-compose exec client npm run test
+   ```
  
 # Serverside
 The (node) services will be available at 
