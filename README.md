@@ -21,6 +21,15 @@ The (node) services will be available at
     
 # Database
 MySQL database bookmanager available at localhost:3306. The application will be initially loaded with three books and three authors.
+
+# TBD
+ - Error handling is not done in all cases especially for service call failures due to time limit.
+ - Test coverage is limited due to time limit.
+ - Edge cases and scenario are not covered.
+ - Toasts are not implemented.
+ - redux-api-middleware would have been an alternate choice.
+ 
+
    
    
    
