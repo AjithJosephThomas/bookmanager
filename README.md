@@ -1,10 +1,10 @@
 # bookmanager
-To run the application:
- Ensure you have docker installed.
+To run the application, ensure you have docker installed.
+```sh
  cd docker
  docker-compose build
  docker-compse up -d
- 
+ ```
  # Clientside
   - The applicaiton will be available at http://localhost:3000
   - React, Redux, Styled components, react router, thunk, axios. 
